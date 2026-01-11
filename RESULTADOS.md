@@ -2,55 +2,46 @@
 
 
 ## 📈 Resumen
-✅ 11 correctas de 17 queries
+✅ 16 correctas de 23 queries
 
 ## ✅ Query 1: Correcto
 
-⏱ Tiempo: 0.45 ms
+⏱ Tiempo: 0.40 ms
 🔍 No se usó ningún índice en esta consulta.
 
 ---
 
 ## ✅ Query 2: Correcto
 
-⏱ Tiempo: 0.34 ms
+⏱ Tiempo: 0.30 ms
 🔍 No se usó ningún índice en esta consulta.
 
 ---
 
 ## ✅ Query 3: Correcto
 
-⏱ Tiempo: 0.34 ms
+⏱ Tiempo: 0.32 ms
 🔍 No se usó ningún índice en esta consulta.
 
 ---
 
-## ❌ Query 4: Incorrecto
-```diff
---- 
-+++ 
-@@ -1,3 +1,3 @@
--nombre | apellido1 | apellido2 | nif
-+nombre | apellido1 | apellido2 | NIF
- Antonio | Fahey | Considine | 10485008K
- Guillermo | Ruecker | Upton | 85869555K
-```
+## ✅ Query 4: Correcto
 
-⏱ Tiempo: 0.35 ms
+⏱ Tiempo: 0.33 ms
 🔍 No se usó ningún índice en esta consulta.
 
 ---
 
 ## ✅ Query 5: Correcto
 
-⏱ Tiempo: 0.40 ms
+⏱ Tiempo: 0.33 ms
 ✅ Se usó índice(s) en la consulta: id_grado
 
 ---
 
 ## ✅ Query 6: Correcto
 
-⏱ Tiempo: 0.42 ms
+⏱ Tiempo: 0.44 ms
 ✅ Se usó índice(s) en la consulta: PRIMARY,id_departamento, PRIMARY
 
 ---
@@ -68,22 +59,22 @@
 +Física para informática | 2016.00 | 2017.00
 ```
 
-⏱ Tiempo: 0.51 ms
-✅ Se usó índice(s) en la consulta: PRIMARY,nif, PRIMARY, PRIMARY,id_asignatura
+⏱ Tiempo: 0.44 ms
+✅ Se usó índice(s) en la consulta: PRIMARY,id_asignatura, PRIMARY, PRIMARY,nif
 
 ---
 
 ## ✅ Query 8: Correcto
 
-⏱ Tiempo: 0.44 ms
-✅ Se usó índice(s) en la consulta: id_profesor,id_grado, PRIMARY,id_departamento, PRIMARY
+⏱ Tiempo: 0.41 ms
+✅ Se usó índice(s) en la consulta: PRIMARY,id_departamento, id_profesor,id_grado, PRIMARY
 
 ---
 
 ## ✅ Query 9: Correcto
 
-⏱ Tiempo: 0.40 ms
-✅ Se usó índice(s) en la consulta: PRIMARY,id_curso_escolar, PRIMARY
+⏱ Tiempo: 0.39 ms
+✅ Se usó índice(s) en la consulta: PRIMARY, PRIMARY,id_curso_escolar
 
 ---
 
@@ -112,60 +103,140 @@
 -Química y Física | Stiedemann | Morissette | Alfredo
 ```
 
-⏱ Tiempo: 0.44 ms
+⏱ Tiempo: 0.42 ms
 ✅ Se usó índice(s) en la consulta: PRIMARY
 
 ---
 
 ## ✅ Query 11: Correcto
 
-⏱ Tiempo: 0.37 ms
+⏱ Tiempo: 0.39 ms
 ✅ Se usó índice(s) en la consulta: PRIMARY
 
 ---
 
 ## ✅ Query 12: Correcto
 
-⏱ Tiempo: 0.35 ms
+⏱ Tiempo: 0.34 ms
 ✅ Se usó índice(s) en la consulta: id_departamento
 
 ---
 
 ## ✅ Query 13: Correcto
 
-⏱ Tiempo: 0.38 ms
-✅ Se usó índice(s) en la consulta: id_profesor, PRIMARY
+⏱ Tiempo: 0.44 ms
+✅ Se usó índice(s) en la consulta: PRIMARY, id_profesor
 
 ---
 
 ## ✅ Query 14: Correcto
 
-⏱ Tiempo: 0.36 ms
+⏱ Tiempo: 0.50 ms
 ✅ Se usó índice(s) en la consulta: PRIMARY
 
 ---
 
-## ❌ Query 15: Error
-- **Descripción**: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SELECT count(*) AS total
-FROM persona
-WHERE tipo='alumno'' at line 9
-
-
-## ❌ Query 16: Incorrecto
+## ❌ Query 15: Incorrecto
 ```diff
 --- 
 +++ 
-@@ -1,2 +1,2 @@
- total
--12.00
-+2.00
+@@ -1,5 +1,4 @@
+ nombre
+-Informática
+ Matemáticas
+ Economía y Empresa
+ Educación
 ```
 
-⏱ Tiempo: 0.35 ms
+⏱ Tiempo: 0.40 ms
+✅ Se usó índice(s) en la consulta: id_departamento, id_profesor
+
+---
+
+## ✅ Query 16: Correcto
+
+⏱ Tiempo: 0.34 ms
 🔍 No se usó ningún índice en esta consulta.
 
 ---
 
-## ❌ Query 17: Error
+## ✅ Query 17: Correcto
+
+⏱ Tiempo: 0.32 ms
+🔍 No se usó ningún índice en esta consulta.
+
+---
+
+## ✅ Query 18: Correcto
+
+⏱ Tiempo: 0.36 ms
+✅ Se usó índice(s) en la consulta: id_departamento, PRIMARY
+
+---
+
+## ❌ Query 19: Incorrecto
+```diff
+--- 
++++ 
+@@ -1,10 +1,10 @@
+ departamento | total
++Educación | 3.00
+ Informática | 2.00
+ Matemáticas | 2.00
+ Economía y Empresa | 2.00
+-Educación | 3.00
++Química y Física | 2.00
+ Agronomía | 1.00
+-Química y Física | 2.00
+ Filología | 0.00
+ Derecho | 0.00
+ Biología y Geología | 0.00
+```
+
+⏱ Tiempo: 0.36 ms
+✅ Se usó índice(s) en la consulta: id_departamento
+
+---
+
+## ❌ Query 20: Incorrecto
+```diff
+--- 
++++ 
+@@ -1,4 +1,4 @@
+-grau | total
++nombre | total
+ Grado en Ingeniería Informática (Plan 2015) | 51.00
+ Grado en Biotecnología (Plan 2015) | 32.00
+ Grado en Ingeniería Agrícola (Plan 2015) | 0.00
+```
+
+⏱ Tiempo: 0.36 ms
+✅ Se usó índice(s) en la consulta: id_grado
+
+---
+
+## ❌ Query 21: Incorrecto
+```diff
+--- 
++++ 
+@@ -1,2 +1,2 @@
+-grau | total
++nombre | total
+ Grado en Ingeniería Informática (Plan 2015) | 51.00
+```
+
+⏱ Tiempo: 0.36 ms
+✅ Se usó índice(s) en la consulta: id_grado
+
+---
+
+## ✅ Query 22: Correcto
+
+⏱ Tiempo: 0.38 ms
+✅ Se usó índice(s) en la consulta: PRIMARY, id_grado
+
+---
+
+## ❌ Query 23: Error
 - **Descripción**: 'NoneType' object is not iterable
 
