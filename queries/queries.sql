@@ -37,9 +37,9 @@ ORDER BY p.apellido1;
 -- 7. Retorna un llistat amb el nom de les assignatures, any d'inici i any de fi del curs escolar de l'alumne/a amb NIF 26902806M. (nombre, anyo_inicio, anyo_fin)
 SELECT a.nombre, c.anyo_inicio, c.anyo_fin
 FROM persona p
-JOIN alumno_se_matricula_asignatura m ON m.id_alumno = p.id
+JOIN alumno_se_matricula_asignatura m ON p.id = m.id_alumno
 JOIN asignatura a ON m.id_asignatura = a.id
-JOIN curso_escolar c ON c.id = a.id
+JOIN curso_escolar c ON m.id_curso_escolar = c.id
 WHERE p.tipo ='alumno'AND p.nif='26902806M';
 
 -- 8. Retorna un llistat amb el nom de tots els departaments que tenen professors/es que imparteixen alguna assignatura en el Grau en Enginyeria Informàtica (Pla 2015). (nombre)
@@ -62,7 +62,7 @@ WHERE c.anyo_inicio = '2018'AND p.tipo ='alumno';
 SELECT distinct d.nombre AS departamento, p.apellido1, p.apellido2, p.nombre
 FROM persona p
 JOIN profesor pf ON p.id = pf.id_profesor 
-LEFT JOIN departamento d ON pf.id_departamento = d.id
+LEFT JOIN departamento d ON  d.id = pf.id_profesor
 ORDER by d.nombre;
 
 -- 11. Retorna un llistat amb els professors/es que no estan associats a un departament. (apellido1, apellido2, nombre)
@@ -119,18 +119,17 @@ ORDER by total DESC;
 SELECT d.nombre AS departamento, count(pf.id_profesor) AS total
 FROM departamento d
 LEFT JOIN profesor pf ON d.id = pf.id_departamento
-GROUP by nombre
-ORDER by total DESC;
+GROUP by nombre;
 
 -- 20. Retorna un llistat amb el nom de tots els graus existents en la base de dades i el nombre d'assignatures que té cadascun. Tingues en compte que poden existir graus que no tenen assignatures associades. Aquests graus també han d'aparèixer en el llistat. El resultat haurà d'estar ordenat de major a menor pel nombre d'assignatures. (grau, total)
-SELECT g.nombre, count(a.id) AS total
+SELECT g.nombre as grau, count(a.id) AS total
 FROM grado g
 LEFT JOIN asignatura a ON g.id = a.id_grado
 GROUP by g.nombre
 ORDER by total DESC;
 
 -- 21. Retorna un llistat amb el nom de tots els graus existents en la base de dades i el nombre d'assignatures que té cadascun, dels graus que tinguin més de 40 assignatures associades. (grau, total)
-SELECT g.nombre, count(a.id) AS total
+SELECT g.nombre as grau, count(a.id) AS total
 FROM grado g
 LEFT JOIN asignatura a ON g.id = a.id_grado
 GROUP by g.nombre
@@ -143,13 +142,28 @@ JOIN asignatura a ON g.id = a.id_grado
 GROUP by g.nombre, a.tipo;
 
 -- 23. Retorna un llistat que mostri quants alumnes s'han matriculat d'alguna assignatura en cadascun dels cursos escolars. El resultat haurà de mostrar dues columnes, una columna amb l'any d'inici del curs escolar i una altra amb el nombre d'alumnes matriculats. (anyo_inicio, total)
-
+SELECT c.anyo_inicio, count(distinct m.id_alumno) AS total
+from curso_escolar c
+JOIN alumno_se_matricula_asignatura m ON c.id = m.id_curso_escolar
+GROUP by c.anyo_inicio;
 
 -- 24. Retorna un llistat amb el nombre d'assignatures que imparteix cada professor/a. El llistat ha de tenir en compte aquells professors/es que no imparteixen cap assignatura. El resultat mostrarà cinc columnes: id, nom, primer cognom, segon cognom i nombre d'assignatures. El resultat estarà ordenat de major a menor pel nombre d'assignatures. (id, nombre, apellido1, apellido2, total)
-
+SELECT p.id, p.nombre, p.apellido1, p.apellido2, count( a.id) as total
+FROM persona p
+JOIN profesor pf ON p.id = pf.id_profesor
+LEFT JOIN asignatura a ON pf.id_profesor =	a.id_profesor
+GROUP BY p.id
+Order by total DESC;
 
 -- 25. Retorna totes les dades de l'alumne/a més jove. (*)
-
+SELECT *
+FROM persona p
+WHERE tipo = 'alumno'
+AND fecha_nacimiento = (SELECT MAX(fecha_nacimiento)FROM persona WHERE tipo='alumno');
 
 -- 26. Retorna un llistat amb els professors/es que tenen un departament associat i que no imparteixen cap assignatura. (apellido1, apellido2, nombre)
-
+SELECT DISTINCT p.apellido1, p.apellido2, p.nombre
+FROM persona p
+JOIN profesor pf ON p.id = pf.id_profesor
+LEFT JOIN asignatura a ON pf.id_profesor = a.id_profesor
+WHERE pf.id_departamento IS NOT NULL AND a.id IS NULL;
