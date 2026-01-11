@@ -2,7 +2,7 @@
 
 
 ## 📈 Resumen
-✅ 16 correctas de 23 queries
+✅ 24 correctas de 26 queries
 
 ## ✅ Query 1: Correcto
 
@@ -27,54 +27,43 @@
 
 ## ✅ Query 4: Correcto
 
-⏱ Tiempo: 0.33 ms
+⏱ Tiempo: 0.32 ms
 🔍 No se usó ningún índice en esta consulta.
 
 ---
 
 ## ✅ Query 5: Correcto
 
-⏱ Tiempo: 0.33 ms
+⏱ Tiempo: 0.37 ms
 ✅ Se usó índice(s) en la consulta: id_grado
 
 ---
 
 ## ✅ Query 6: Correcto
 
-⏱ Tiempo: 0.44 ms
+⏱ Tiempo: 0.41 ms
 ✅ Se usó índice(s) en la consulta: PRIMARY,id_departamento, PRIMARY
 
 ---
 
-## ❌ Query 7: Incorrecto
-```diff
---- 
-+++ 
-@@ -1,4 +1,4 @@
- nombre | anyo_inicio | anyo_fin
- Álgegra lineal y matemática discreta | 2014.00 | 2015.00
--Cálculo | 2014.00 | 2015.00
--Física para informática | 2014.00 | 2015.00
-+Cálculo | 2015.00 | 2016.00
-+Física para informática | 2016.00 | 2017.00
-```
+## ✅ Query 7: Correcto
 
-⏱ Tiempo: 0.44 ms
-✅ Se usó índice(s) en la consulta: PRIMARY,id_asignatura, PRIMARY, PRIMARY,nif
+⏱ Tiempo: 0.62 ms
+✅ Se usó índice(s) en la consulta: PRIMARY,nif, PRIMARY, PRIMARY,id_asignatura,id_curso_escolar
 
 ---
 
 ## ✅ Query 8: Correcto
 
 ⏱ Tiempo: 0.41 ms
-✅ Se usó índice(s) en la consulta: PRIMARY,id_departamento, id_profesor,id_grado, PRIMARY
+✅ Se usó índice(s) en la consulta: PRIMARY,id_departamento, PRIMARY, id_profesor,id_grado
 
 ---
 
 ## ✅ Query 9: Correcto
 
-⏱ Tiempo: 0.39 ms
-✅ Se usó índice(s) en la consulta: PRIMARY, PRIMARY,id_curso_escolar
+⏱ Tiempo: 0.38 ms
+✅ Se usó índice(s) en la consulta: PRIMARY,id_curso_escolar, PRIMARY
 
 ---
 
@@ -84,54 +73,61 @@
 +++ 
 @@ -1,13 +1,13 @@
  departamento | apellido1 | apellido2 | nombre
- Agronomía | Monahan | Murray | Micaela
-+Economía y Empresa | Lemke | Rutherford | Cristina
- Economía y Empresa | Fahey | Considine | Antonio
+-Agronomía | Monahan | Murray | Micaela
+-Economía y Empresa | Fahey | Considine | Antonio
 -Economía y Empresa | Lemke | Rutherford | Cristina
 -Educación | Ruecker | Upton | Guillermo
- Educación | Spencer | Lakin | Esther
- Educación | Streich | Hirthe | Carmen
-+Educación | Ruecker | Upton | Guillermo
-+Informática | Ramirez | Gea | Zoe
- Informática | Hamill | Kozey | Manolo
+-Educación | Spencer | Lakin | Esther
+-Educación | Streich | Hirthe | Carmen
+-Informática | Hamill | Kozey | Manolo
 -Informática | Ramirez | Gea | Zoe
-+Matemáticas | Schmidt | Fisher | David
- Matemáticas | Kohler | Schoen | Alejandro
+-Matemáticas | Kohler | Schoen | Alejandro
 -Matemáticas | Schmidt | Fisher | David
-+Química y Física | Stiedemann | Morissette | Alfredo
- Química y Física | Schowalter | Muller | Francesca
+-Química y Física | Schowalter | Muller | Francesca
 -Química y Física | Stiedemann | Morissette | Alfredo
++NULL | Hamill | Kozey | Manolo
++NULL | Kohler | Schoen | Alejandro
++NULL | Fahey | Considine | Antonio
++NULL | Spencer | Lakin | Esther
++NULL | Streich | Hirthe | Carmen
++NULL | Ruecker | Upton | Guillermo
++NULL | Monahan | Murray | Micaela
++NULL | Stiedemann | Morissette | Alfredo
++NULL | Schowalter | Muller | Francesca
++Agronomía | Schmidt | Fisher | David
++Derecho | Lemke | Rutherford | Cristina
++Economía y Empresa | Ramirez | Gea | Zoe
 ```
 
-⏱ Tiempo: 0.42 ms
+⏱ Tiempo: 0.43 ms
 ✅ Se usó índice(s) en la consulta: PRIMARY
 
 ---
 
 ## ✅ Query 11: Correcto
 
-⏱ Tiempo: 0.39 ms
+⏱ Tiempo: 0.35 ms
 ✅ Se usó índice(s) en la consulta: PRIMARY
 
 ---
 
 ## ✅ Query 12: Correcto
 
-⏱ Tiempo: 0.34 ms
+⏱ Tiempo: 0.32 ms
 ✅ Se usó índice(s) en la consulta: id_departamento
 
 ---
 
 ## ✅ Query 13: Correcto
 
-⏱ Tiempo: 0.44 ms
+⏱ Tiempo: 0.36 ms
 ✅ Se usó índice(s) en la consulta: PRIMARY, id_profesor
 
 ---
 
 ## ✅ Query 14: Correcto
 
-⏱ Tiempo: 0.50 ms
+⏱ Tiempo: 0.33 ms
 ✅ Se usó índice(s) en la consulta: PRIMARY
 
 ---
@@ -148,95 +144,87 @@
  Educación
 ```
 
-⏱ Tiempo: 0.40 ms
-✅ Se usó índice(s) en la consulta: id_departamento, id_profesor
+⏱ Tiempo: 0.34 ms
+✅ Se usó índice(s) en la consulta: id_profesor, id_departamento
 
 ---
 
 ## ✅ Query 16: Correcto
 
-⏱ Tiempo: 0.34 ms
+⏱ Tiempo: 0.31 ms
 🔍 No se usó ningún índice en esta consulta.
 
 ---
 
 ## ✅ Query 17: Correcto
 
-⏱ Tiempo: 0.32 ms
+⏱ Tiempo: 0.30 ms
 🔍 No se usó ningún índice en esta consulta.
 
 ---
 
 ## ✅ Query 18: Correcto
 
-⏱ Tiempo: 0.36 ms
-✅ Se usó índice(s) en la consulta: id_departamento, PRIMARY
+⏱ Tiempo: 0.37 ms
+✅ Se usó índice(s) en la consulta: PRIMARY, id_departamento
 
 ---
 
-## ❌ Query 19: Incorrecto
-```diff
---- 
-+++ 
-@@ -1,10 +1,10 @@
- departamento | total
-+Educación | 3.00
- Informática | 2.00
- Matemáticas | 2.00
- Economía y Empresa | 2.00
--Educación | 3.00
-+Química y Física | 2.00
- Agronomía | 1.00
--Química y Física | 2.00
- Filología | 0.00
- Derecho | 0.00
- Biología y Geología | 0.00
-```
+## ✅ Query 19: Correcto
 
-⏱ Tiempo: 0.36 ms
+⏱ Tiempo: 0.33 ms
 ✅ Se usó índice(s) en la consulta: id_departamento
 
 ---
 
-## ❌ Query 20: Incorrecto
-```diff
---- 
-+++ 
-@@ -1,4 +1,4 @@
--grau | total
-+nombre | total
- Grado en Ingeniería Informática (Plan 2015) | 51.00
- Grado en Biotecnología (Plan 2015) | 32.00
- Grado en Ingeniería Agrícola (Plan 2015) | 0.00
-```
+## ✅ Query 20: Correcto
 
-⏱ Tiempo: 0.36 ms
+⏱ Tiempo: 0.34 ms
 ✅ Se usó índice(s) en la consulta: id_grado
 
 ---
 
-## ❌ Query 21: Incorrecto
-```diff
---- 
-+++ 
-@@ -1,2 +1,2 @@
--grau | total
-+nombre | total
- Grado en Ingeniería Informática (Plan 2015) | 51.00
-```
+## ✅ Query 21: Correcto
 
-⏱ Tiempo: 0.36 ms
+⏱ Tiempo: 0.33 ms
 ✅ Se usó índice(s) en la consulta: id_grado
 
 ---
 
 ## ✅ Query 22: Correcto
 
-⏱ Tiempo: 0.38 ms
+⏱ Tiempo: 0.33 ms
 ✅ Se usó índice(s) en la consulta: PRIMARY, id_grado
 
 ---
 
-## ❌ Query 23: Error
-- **Descripción**: 'NoneType' object is not iterable
+## ✅ Query 23: Correcto
 
+⏱ Tiempo: 0.33 ms
+✅ Se usó índice(s) en la consulta: id_curso_escolar, PRIMARY
+
+---
+
+## ✅ Query 24: Correcto
+
+⏱ Tiempo: 0.35 ms
+✅ Se usó índice(s) en la consulta: PRIMARY,nif, PRIMARY, id_profesor
+
+---
+
+## ✅ Query 25: Correcto
+
+⏱ Tiempo: 0.35 ms
+🔍 No se usó ningún índice en esta consulta.
+
+🚨 **Problemas detectados:**
+⚠️ Evitar `SELECT *`. Usar solo las columnas necesarias.
+
+---
+
+## ✅ Query 26: Correcto
+
+⏱ Tiempo: 0.35 ms
+✅ Se usó índice(s) en la consulta: PRIMARY, id_profesor
+
+---
