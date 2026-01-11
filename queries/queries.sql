@@ -35,38 +35,78 @@ WHERE tipo = 'profesor'
 ORDER BY p.apellido1;
 
 -- 7. Retorna un llistat amb el nom de les assignatures, any d'inici i any de fi del curs escolar de l'alumne/a amb NIF 26902806M. (nombre, anyo_inicio, anyo_fin)
-
+SELECT a.nombre, c.anyo_inicio, c.anyo_fin
+FROM persona p
+JOIN alumno_se_matricula_asignatura m ON m.id_alumno = p.id
+JOIN asignatura a ON m.id_asignatura = a.id
+JOIN curso_escolar c ON c.id = a.id
+WHERE p.tipo ='alumno'AND p.nif='26902806M';
 
 -- 8. Retorna un llistat amb el nom de tots els departaments que tenen professors/es que imparteixen alguna assignatura en el Grau en Enginyeria Informàtica (Pla 2015). (nombre)
-
+SELECT DISTINCT d.nombre
+FROM departamento d
+JOIN profesor p ON d.id = p.id_departamento
+JOIN asignatura a ON p.id_profesor = a.id_profesor
+JOIN grado g ON a.id_grado = g.id
+WHERE g.nombre = 'Grado en Ingeniería Informática (Plan 2015)';
 
 -- 9. Retorna un llistat amb tots els alumnes que s'han matriculat en alguna assignatura durant el curs escolar 2018/2019. (nombre, apellido1, apellido2)
-
+SELECT distinct p.nombre, p.apellido1, p.apellido2
+FROM persona p
+JOIN alumno_se_matricula_asignatura m ON p.id=m.id_alumno
+JOIN curso_escolar c ON m.id_curso_escolar = c.id
+WHERE c.anyo_inicio = '2018'AND p.tipo ='alumno';
 
 -- Resol les 6 següents consultes utilitzant les clàusules LEFT JOIN i RIGHT JOIN.
 -- 10. Retorna un llistat amb els noms de tots els professors/es i els departaments que tenen vinculats. El llistat també ha de mostrar aquells professors/es que no tenen cap departament associat. El llistat ha de retornar quatre columnes, nom del departament, primer cognom, segon cognom i nom del professor/a. El resultat estarà ordenat alfabèticament de menor a major pel nom del departament, cognoms i el nom. (departamento, apellido1, apellido2, nombre)
-
+SELECT distinct d.nombre AS departamento, p.apellido1, p.apellido2, p.nombre
+FROM persona p
+JOIN profesor pf ON p.id = pf.id_profesor 
+LEFT JOIN departamento d ON pf.id_departamento = d.id
+ORDER by d.nombre;
 
 -- 11. Retorna un llistat amb els professors/es que no estan associats a un departament. (apellido1, apellido2, nombre)
-
+SELECT distinct p.apellido1, p.apellido2, p.nombre
+FROM persona p
+JOIN profesor pf ON p.id = pf.id_profesor 
+LEFT JOIN departamento d ON pf.id_departamento = d.id
+WHERE d.id is null;
 
 -- 12. Retorna un llistat amb els departaments que no tenen professors/es associats. (nombre)
-
+SELECT d.nombre
+FROM departamento d
+LEFT JOIN profesor p ON d.id=p.id_departamento
+WHERE p.id_profesor is null;
 
 -- 13. Retorna un llistat amb els professors/es que no imparteixen cap assignatura. (apellido1, apellido2, nombre)
-
+SELECT distinct p.apellido1, p.apellido2, p.nombre
+FROM persona p
+JOIN profesor pf ON p.id = pf.id_profesor 
+LEFT JOIN asignatura a ON pf.id_profesor = a.id_profesor
+WHERE a.id is NULL;
 
 -- 14. Retorna un llistat amb les assignatures que no tenen un professor/a assignat. (id, nombre)
-
+SELECT distinct a.id, a.nombre
+FROM asignatura a
+LEFT JOIN profesor pf ON a.id_profesor = pf.id_profesor 
+WHERE pf.id_profesor is NULL;
 
 -- 15. Retorna un llistat amb tots els departaments que no han impartit assignatures en cap curs escolar. (nombre)
-
+SELECT distinct d.nombre
+FROM departamento d
+LEFT JOIN profesor pf ON d.id = pf.id_departamento
+LEFT JOIN asignatura a ON pf.id_profesor = a.id_profesor
+WHERE a.id is null
 
 -- 16. Retorna el nombre total d'alumnes que hi ha. (total)
-
+SELECT count(*) AS total
+FROM persona
+WHERE tipo='alumno';
 
 -- 17. Calcula quants alumnes van néixer en 1999. (total)
-
+SELECT count(*) AS total
+FROM persona
+WHERE tipo='alumno' AND fecha_nacimiento BETWEEN '1999-01-01' AND '1999-12-31';
 
 -- 18. Calcula quants professors/es hi ha en cada departament. El resultat només ha de mostrar dues columnes, una amb el nom del departament i una altra amb el nombre de professors/es que hi ha en aquest departament. El resultat només ha d'incloure els departaments que tenen professors/es associats i haurà d'estar ordenat de major a menor pel nombre de professors/es. (departamento, total)
 
